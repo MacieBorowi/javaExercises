@@ -16,13 +16,14 @@ package com.capgemini.pascalrectangle;
 public class PascalRectangle {
     public long pascal(int c, int r) throws WrongParameter {
 
-    	if(c==0||c==r) return 1;
-    	if(c<=0 || r<=0 || r*c<0 ) throw new WrongParameter(" Wrong data input ");
+    	if(c==0||c==r) {
+    		return 1;
+    	}
     	
-    	
-    	long result;
-    	result = pascal(c-1,r-1) + pascal(c,r-1);
-    	
-    	return result;
+    	if(c<=0 || r<=0 || r*c<0 ) {
+    		throw new WrongParameter(" Wrong data input ");
+    	}
+    
+    	return pascal(c-1,r-1) + pascal(c,r-1);
     }
 }

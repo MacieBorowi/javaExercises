@@ -8,23 +8,27 @@ import org.junit.rules.ExpectedException;
 
 public class PascalRectangleTest {
 	
-	@Rule public ExpectedException thrown= ExpectedException.none();
+	//@Rule public ExpectedException thrown= ExpectedException.none();
 	
 	private PascalRectangle i = new PascalRectangle();
 	
-	@Test(expected=WrongParameter.class)
-	public void shouldNegativRow() throws WrongParameter {
+	@Test//(expected=WrongParameter.class)
+	public void shouldNegativRow() {
 
 		// given
-		int r = 0;
-		int c = -1;
+		int r = -1;
+		int c = 0;
 
 		// when
-		long result = i.pascal(c,r);
-
-		
+		long result;
+		try {
+			result = i.pascal(c,r);
+		} catch (WrongParameter e) {
+			
 		// then
-		assertEquals(1, result);
+			assertEquals(" Wrong data input ", e.getMessage());
+		}
+		
 		
 	}
 	
