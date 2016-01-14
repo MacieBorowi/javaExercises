@@ -13,10 +13,10 @@ public class PascalRectangleTest {
 	private PascalRectangle i = new PascalRectangle();
 	
 	@Test(expected=WrongParameter.class)
-	public void shouldNegativColumnAndRow() throws WrongParameter {
+	public void shouldNegativRow() throws WrongParameter {
 
 		// given
-		int r = -1;
+		int r = 0;
 		int c = -1;
 
 		// when
