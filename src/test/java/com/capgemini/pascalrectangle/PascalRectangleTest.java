@@ -2,9 +2,7 @@ package com.capgemini.pascalrectangle;
 
 import static org.junit.Assert.*;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class PascalRectangleTest {
 	
@@ -16,13 +14,32 @@ public class PascalRectangleTest {
 	public void shouldNegativRow() {
 
 		// given
-		int r = -1;
-		int c = 0;
+		int row = -1;
+		int column = 0;
+
+		long result;
+		// when
+		try {
+			result = i.pascal(column,row);
+		} catch (WrongParameter e) {
+			
+		// then
+			assertEquals(" Wrong data input ", e.getMessage());
+		}
+		
+		
+	}
+	
+	@Test//(expected=WrongParameter.class)
+	public void shouldNegativColumn() {
+
+		// given
+		int row = 0;
+		int column = -1;
 
 		// when
-		long result;
 		try {
-			result = i.pascal(c,r);
+			i.pascal(column,row);
 		} catch (WrongParameter e) {
 			
 		// then
@@ -34,14 +51,14 @@ public class PascalRectangleTest {
 	
 	@Test
 	
-	public void shouldPascalColumn0Row0() throws WrongParameter {
+	public void shouldPascalPeakOfRectangle() throws WrongParameter {
 
 		// given
-		int r = 0;
-		int c = 0;
+		int row = 0;
+		int column = 0;
 
 		// when
-		long result = i.pascal(c,r);
+		long result = i.pascal(column,row);
 
 		// then
 		assertEquals(1, result);
@@ -49,14 +66,14 @@ public class PascalRectangleTest {
 	}
 	
 	@Test
-	public void shouldPascalColumn0Row1() throws WrongParameter {
+	public void shouldPascalFirsRow() throws WrongParameter {
 
 		// given
-		int r = 1;
-		int c = 0;
+		int row = 1;
+		int column = 0;
 
 		// when
-		long result = i.pascal(c,r);
+		long result = i.pascal(column,row);
 
 		// then
 		assertEquals(1, result);
@@ -64,14 +81,14 @@ public class PascalRectangleTest {
 	}
 	
 	@Test
-	public void shouldPascalColumn1Row1() throws WrongParameter {
+	public void shouldPascalLeftEdge() throws WrongParameter {
 
 		// given
-		int r = 1;
-		int c = 1;
+		int row = 5;
+		int column = 0;
 
 		// when
-		long result = i.pascal(c,r);
+		long result = i.pascal(column,row);
 
 		// then
 		assertEquals(1, result);
@@ -79,14 +96,14 @@ public class PascalRectangleTest {
 	}
 	
 	@Test
-	public void shouldPascalColumn5Row5() throws WrongParameter {
+	public void shouldPascalRightEdge() throws WrongParameter {
 
 		// given
-		int r = 5;
-		int c = 5;
+		int row = 5;
+		int column = 5;
 
 		// when
-		long result = i.pascal(c,r);
+		long result = i.pascal(column,row);
 
 		// then
 		assertEquals(1, result);
@@ -97,11 +114,11 @@ public class PascalRectangleTest {
 	public void shouldPascalColumn4Row9() throws WrongParameter {
 
 		// given
-		int r = 9;
-		int c = 4;
+		int row = 9;
+		int column = 4;
 
 		// when
-		long result = i.pascal(c,r);
+		long result = i.pascal(column,row);
 
 		// then
 		assertEquals(126, result);
