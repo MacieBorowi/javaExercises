@@ -152,6 +152,24 @@ public class BowlingTest {
 	}
 
 	@Test
+	public void shouldAllNormal() {
+
+		// given
+		int singleHit = 4;
+		int howManyTimes = 20;
+
+		// when
+		for (int i = 0; i < howManyTimes; i++) {
+			player.roll(singleHit);
+		}
+		int score = player.score();
+
+		// then
+		Assert.assertEquals(80, score);
+
+	}
+
+	@Test
 	public void sholundNormalEnding() {
 
 		// given
@@ -172,24 +190,6 @@ public class BowlingTest {
 	}
 
 	@Test
-	public void shouldAllNormal() {
-
-		// given
-		int singleHit = 4;
-		int howManyTimes = 20;
-
-		// when
-		for (int i = 0; i < howManyTimes; i++) {
-			player.roll(singleHit);
-		}
-		int score = player.score();
-
-		// then
-		Assert.assertEquals(80, score);
-
-	}
-
-	@Test
 	public void shouldAllStrike() {
 
 		// given
@@ -203,6 +203,7 @@ public class BowlingTest {
 
 		// then
 		Assert.assertEquals(300, score);
+		Assert.assertTrue(player.isFinished());
 
 	}
 
@@ -245,7 +246,7 @@ public class BowlingTest {
 		int score = player.score();
 
 		// then
-		Assert.assertEquals(280, score);
+		Assert.assertEquals(276, score);
 		Assert.assertTrue(player.isFinished());
 
 	}

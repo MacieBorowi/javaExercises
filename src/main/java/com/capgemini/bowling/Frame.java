@@ -1,61 +1,36 @@
 package com.capgemini.bowling;
 
-public class Frame {
+public class Frame extends AbstractFrame {
 
-	private int firstRoll = 0;
-	private int secoundRoll = 0;
-	private int extra = 0;
-	private boolean isFinisched = false;
-
-	public Frame(int firstRoll) {
-		this.firstRoll = firstRoll;
-		if (firstRoll == 10) {
-			isFinisched = true;
-		}
-	}
-
-	public int getScore() {
-		return firstRoll + secoundRoll;
-	}
-
-	public boolean isStrike() {
-		return firstRoll == 10;
-	}
-
-	public boolean isSpare() {
-		return firstRoll + secoundRoll == 10 && !this.isStrike();
-	}
-
-	public boolean isFinisched() {
-		return isFinisched;
-	}
-
-	public int getFirstRoll() {
-		return firstRoll;
-	}
-
-	public int getSecoundRoll() {
-		return secoundRoll;
-	}
-
-	public void setSecoundRoll(int secoundRoll) {
-		if (!isFinisched) {
-			this.secoundRoll = secoundRoll;
-		}
-		isFinisched = true;
+	public Frame() {
+		super();
 	}
 
 	public int getExtra() {
+		int extra = 0;
+		if (this.isSpare() && nextFrame != null) {
+			extra = nextFrame.getOneThrow();
+		}
+
+		if (this.isStrike() && nextFrame != null) {
+			extra = nextFrame.getSumOfTwoThrows();
+		}
 		return extra;
 	}
 
-	public void setExtra(int extra) {
-		this.extra = extra;
+	public boolean isFinished() {
+		return rolls.size() == 2 || (rolls.size() == 1 && this.rolls.get(0) == 10);
 	}
 
-	@Override
-	public String toString() {
-		return "[" + firstRoll + "][" + secoundRoll + "][" + extra + "]";
+	public int getSumOfTwoThrows() {
+		int sumOfRoll = 0;
+		if (rolls.size() == 1 && nextFrame != null) {
+			sumOfRoll = rolls.get(0) + nextFrame.getOneThrow();
+		}
+		if (rolls.size() == 2) {
+			sumOfRoll = rolls.get(0) + rolls.get(1);
+		}
+		return sumOfRoll;
 	}
 
 }
