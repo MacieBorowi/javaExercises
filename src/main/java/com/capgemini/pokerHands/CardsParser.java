@@ -40,16 +40,17 @@ public class CardsParser {
 
 		for (int i = 2; i < playerCards.size(); i += 2) {
 			int figure = changeNames(playerCards, i);
+			boolean added = false;
 			for (int j = 0; j < groupedList.size(); j++) {
 				CardAndAmontPair thePair = groupedList.get(j);
 				if (thePair.getFigure() == figure) {
 					thePair.setAmount(thePair.getAmount() + 1);
-				} else {
-					groupedList.add(new CardAndAmontPair(figure, 1));
-					j = groupedList.size();
+					added = true;
 				}
 			}
-
+			if (!added) {
+				groupedList.add(new CardAndAmontPair(figure, 1));
+			}
 		}
 		Collections.sort(groupedList, new ComparatorListOfPair());
 		return new ArrayList<CardAndAmontPair>(groupedList);
