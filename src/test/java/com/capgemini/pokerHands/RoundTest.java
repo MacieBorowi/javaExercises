@@ -195,4 +195,20 @@ public class RoundTest {
 
 	}
 
+	@Test
+	public void sholundGameWithFile376() {
+
+		// given
+		PokerGame poker = new PokerGame();
+		int expected = 376;
+
+		// when
+		poker.playGameFromFile();
+		int result = poker.getScore();
+
+		// then
+		Assert.assertEquals(376, result);
+
+	}
+
 }
